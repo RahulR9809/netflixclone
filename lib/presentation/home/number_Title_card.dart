@@ -3,9 +3,9 @@ import 'package:netflix/presentation/home/number_card.dart';
 import 'package:netflix/presentation/widgets/main_titile.dart';
 class NumberTitleCard extends StatelessWidget {
   const NumberTitleCard({
-    super.key,
+    super.key,required this.movies,
   });
-
+  final List movies;
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -17,7 +17,7 @@ class NumberTitleCard extends StatelessWidget {
           children: List.generate(
               10,
               (index) => NumberCard(
-                    index: index,
+                    index: index, image: movies[index].imagepath,
                   )),
         ),
       )

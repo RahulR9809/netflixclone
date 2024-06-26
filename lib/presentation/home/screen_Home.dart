@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:netflix/application/controller/controller_movie.dart';
 import 'package:netflix/core/colors/constsans.dart';
 import 'package:netflix/presentation/home/background_Card.dart';
 import 'package:netflix/presentation/home/number_Title_card.dart';
@@ -9,8 +10,32 @@ import 'package:netflix/presentation/widgets/main_title_card.dart';
 
 ValueNotifier<bool> scrollnotifier = ValueNotifier(true);
 
-class ScreenHome extends StatelessWidget {
+class ScreenHome extends StatefulWidget {
   const ScreenHome({super.key});
+
+  @override
+  State<ScreenHome> createState() => _ScreenHomeState();
+}
+
+class _ScreenHomeState extends State<ScreenHome> {
+  List nowplaying=[];
+  List toprated=[];
+  List popular=[];
+  List upcoming=[];
+  List clone=[];
+  Future getAllmovies()async{
+       popular=await movieServies.getpopularMovies();
+    nowplaying=await movieServies.getNowplayingMovies();
+    upcoming=await movieServies.getUpcomingMovies(); 
+    clone=await movieServies.getNowplayingMovies();
+    setState(() {});
+  }
+  @override
+  void initState() {
+    getAllmovies();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,21 +59,25 @@ class ScreenHome extends StatelessWidget {
                       children: [
                         BackgroundCard(),
                         MainTitleCard(
-                          title: 'Released in the past year',
+                          title: 'Released in the past year', 
+                          movies: upcoming,
                         ),
                         kheight,
                         MainTitleCard(
                           title: 'Trending Now',
+                           movies: popular,
                         ),
                         kheight,
-                        NumberTitleCard(),
+                        NumberTitleCard(movies: upcoming, ),
                         kheight,
                         MainTitleCard(
                           title: 'Tense Dramas',
+                           movies:upcoming,
                         ),
                         kheight,
                         MainTitleCard(
                           title: 'South Indian cinema',
+                           movies:clone,
                         ),
                         kheight,
                       ],
@@ -68,7 +97,7 @@ class ScreenHome extends StatelessWidget {
                                           10.0), 
                                       child: const Image(
                                         image: NetworkImage(
-                                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGZhYUrmk6vDmi1-Pj7oI-HzTpQDCi9-IFTA&s',
+                                         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGZhYUrmk6vDmi1-Pj7oI-HzTpQDCi9-IFTA&s'
                                         ),
                                         height: 55,
                                         width: 55,

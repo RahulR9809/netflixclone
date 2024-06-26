@@ -1,17 +1,57 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:netflix/core/colors/colors.dart';
+import 'package:video_player/video_player.dart';
 
-class VideoListItem extends StatelessWidget {
+class VideoListItem extends StatefulWidget {
   final int index;
-  const VideoListItem({super.key, required this.index});
+  final String videourl;
+  const VideoListItem({super.key, required this.index,required this.videourl});
 
+  @override
+  State<VideoListItem> createState() => _VideoListItemState();
+}
+class _VideoListItemState extends State<VideoListItem> {
+late VideoPlayerController _videoPlayerController;
+bool isVolume=true;
+bool isPlay=true;
+
+  @override
+  void initState() {
+    super.initState();
+    videoController(videoPath: videoPathList[widget.index]);
+  }
+
+
+  void videoController({required String videoPath}) {
+    _videoPlayerController = VideoPlayerController.network(videoPath);
+    _videoPlayerController.initialize().then((_) {
+      setState(() {
+        _videoPlayerController.play();
+        _videoPlayerController.setVolume(isVolume ? 1.0 : 0.0);
+      });
+    });
+  }
+
+
+  void toggleVolume() {
+    setState(() {
+      isVolume = !isVolume;
+      _videoPlayerController.setVolume(isVolume ? 1.0 : 0.0);
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Stack(
       children:[
         Container(
       
-        color: Colors.accents[index % Colors.accents.length],
+                  child: _videoPlayerController.value.isInitialized
+              ? VideoPlayer(_videoPlayerController)
+              : Center(child: CircularProgressIndicator()),
+
       ),
       Align(
         alignment: Alignment.bottomCenter,
@@ -26,8 +66,10 @@ class VideoListItem extends StatelessWidget {
                 backgroundColor: Colors.black.withOpacity(0.5),
                 radius: 28,
                 child: IconButton(
-                  onPressed: (){},
-                   icon: Icon(Icons.volume_off,size: 28,color: kwhite,)
+                  onPressed: toggleVolume,
+                   icon: Icon(
+                     isVolume ? Icons.volume_up : Icons.volume_off,
+                    size: 28,color: kwhite,)
                    )
                    ),
                    //right side
@@ -78,3 +120,17 @@ class videActionsWidget extends StatelessWidget {
     );
   }
 }
+List<String> videoPathList = [
+  'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4",
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+];
