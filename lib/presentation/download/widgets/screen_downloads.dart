@@ -3,15 +3,15 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:netflix/core/colors/colors.dart';
 import 'package:netflix/core/colors/constsans.dart';
-import 'package:netflix/presentation/widgets/app_bar-widget.dart';
+import 'package:netflix/presentation/widgets/app_bar_widget.dart';
 
-class screenDownloads extends StatelessWidget {
-  screenDownloads({super.key});
+class ScreenDownloads extends StatelessWidget {
+  ScreenDownloads({super.key});
 
 final _widgetList= [
-            const _smartDownload(),
-           section2(),
-            section3()
+            const SmartDownload(),
+           Section2(),
+            const Section3()
             ];
 
   @override
@@ -24,16 +24,16 @@ final _widgetList= [
           ),
         ),
         body: ListView.separated(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           itemBuilder: (ctx,index)=>_widgetList[index],
-           separatorBuilder: (ctx,index)=>SizedBox(height: 25 ,),
+           separatorBuilder: (ctx,index)=>const SizedBox(height: 25 ,),
             itemCount:_widgetList.length)
         );
   }
 }
 
-class section2 extends StatelessWidget {
-  section2({super.key});
+class Section2 extends StatelessWidget {
+  Section2({super.key});
   final List<String> imageList = [
     "https://resizing.flixster.com/PMSe3EQVK3Z89vo1tYGC-5PAxrE=/206x305/v2/https://resizing.flixster.com/P3ITKQPm33gw4K73O9DYCOfyZ4E=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzQ1Zjg4NDFhLWMxY2EtNDU3NC04OTNmLTQ4MTJiMzc3Y2EwZC5qcGc=",
     "https://resizing.flixster.com/CCTwucvqizkxoWsRKclAQauBRAQ=/206x305/v2/https://resizing.flixster.com/2bpFxoybigCD78l_tMP4wE7m6j4=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzL2IwMmU1NmEwLTM0MzQtNDYzMC1iNWExLWFiMmNiMzRkNzcwZC5qcGc=",
@@ -72,20 +72,20 @@ class section2 extends StatelessWidget {
               ),
               DownloadsimageWidgets(  
                 imageList: imageList[0],
-                margin: EdgeInsets.only(left: 170,top: 25),
+                margin: const EdgeInsets.only(left: 170,top: 25),
                 size: Size(size.width * 0.35, size.height * 0.22),
                 angle: 25,   
               ),   
               DownloadsimageWidgets(     
                 imageList: imageList[1],  
-                margin: EdgeInsets.only(right: 170,top: 25),
+                margin: const EdgeInsets.only(right: 170,top: 25),
                 size: Size(size.width * 0.35, size.height * 0.22),
                 angle: -25, 
               ),  
               DownloadsimageWidgets(   
                 imageList: imageList[2],    
                 radius: 10,
-                margin: EdgeInsets.only(top: 2),
+                margin: const EdgeInsets.only(top: 2),
                 size: Size(size.width * 0.40, size.height * 0.27),
               ),
             ],
@@ -96,8 +96,8 @@ class section2 extends StatelessWidget {
   }
 }
 
-class section3 extends StatelessWidget {
-  const section3({super.key});
+class Section3 extends StatelessWidget {
+  const Section3({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +109,7 @@ class section3 extends StatelessWidget {
             height: 46,
             color: kbuttoncolorblue,
             onPressed: () {},
-            child: Text(
+            child: const Text(
               'set up',
               style: TextStyle(
                   color: kwhite, fontSize: 20, fontWeight: FontWeight.bold),
@@ -121,7 +121,7 @@ class section3 extends StatelessWidget {
           height: 38,  
           color: kbuttoncolorwhite,
           onPressed: () {},
-          child: Text(
+          child: const Text(
             'see what you can download',
             style: TextStyle(
                 color: kblackcolor, fontSize: 20, fontWeight: FontWeight.bold),
@@ -132,14 +132,14 @@ class section3 extends StatelessWidget {
   }
 }
 
-class _smartDownload extends StatelessWidget {
-  const _smartDownload({
+class SmartDownload extends StatelessWidget {
+  const SmartDownload({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       children: [
         kwidth,
         Icon(

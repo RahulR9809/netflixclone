@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ import 'package:netflix/presentation/search/widget/search_idle.dart';
 import 'package:netflix/presentation/search/widget/search_result.dart';
 
 class Search extends StatefulWidget {
-  const Search({Key? key}) : super(key: key);
+  const Search({super.key});
 
   @override
   State<Search> createState() => _SearchState();
@@ -18,12 +19,11 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   final controller = TextEditingController();
   List<Movie> popoular = [];
-
-  List<Movie> SearchResults = [];
+  List<Movie> searchResults = [];
   bool istapped = true;
   Future getPopular() async {
     if (mounted) {
-      popoular = await movieServies.getpopularMovies();
+      popoular = await MovieServies.getpopularMovies();
       setState(() {});
     }
   }
@@ -32,7 +32,7 @@ class _SearchState extends State<Search> {
     if (controller.text.isEmpty) {
       setState(() {
         istapped = true;
-        SearchResults.clear();
+        searchResults.clear();
       });
     } else {
       await _featchdataFromServer(controller.text);
@@ -43,7 +43,7 @@ class _SearchState extends State<Search> {
     List<Movie> result = await searchfunction(query);
     setState(() {
       istapped = false;
-      SearchResults = result;
+      searchResults = result;
     });
   }
 
@@ -108,7 +108,7 @@ class _SearchState extends State<Search> {
           ))
         : Expanded(
             child: Searchresultresult(
-            result: SearchResults,
+            result: searchResults,
           ));
   }
 
@@ -131,7 +131,9 @@ class _SearchState extends State<Search> {
               .cast<Movie>();
         }
       } catch (e) {
-        print('Error in fetching the data');
+        if (kDebugMode) {
+          print('Error in fetching the data');
+        }
       }
       mintries++;
     }

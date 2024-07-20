@@ -21,7 +21,7 @@ final String image;
           child: CircleAvatar(
             radius: 22,
             backgroundColor: Colors.black.withOpacity(0.5),
-            child: Icon(
+            child: const Icon(
               Icons.volume_off,
               color: kwhite,
               size: 20,

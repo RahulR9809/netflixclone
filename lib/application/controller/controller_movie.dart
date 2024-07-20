@@ -1,12 +1,12 @@
-// ignore_for_file: unused_field
 
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:netflix/application/model/movie_model.dart';
 
-class movieServies {
+class MovieServies {
   static const _apikey = '96f560a556cfc8bf08b66324fe6490a6';
+
   static const _baseurl = 'https://api.themoviedb.org/3/movie/';
 
   static const _nowplaying =
@@ -30,11 +30,13 @@ class movieServies {
 
           return data
               .map((json) => Movie.fromJson(json))
-              .toList()
-              .cast<Movie>();
+              .toList();
+              
         }
       } catch (e) {
-        print('Error fetching now playing movies:$e');
+        if (kDebugMode) {
+          print('Error fetching now playing movies:$e');
+        }
       }
       retrayCount++;
     }
@@ -52,11 +54,13 @@ class movieServies {
           final List<dynamic> data = jsonDecode(response.body)['results'];
           return data
               .map((json) => Movie.fromJson(json))
-              .toList()
-              .cast<Movie>();
+              .toList();
+              
         }
       } catch (e) {
-        Text('Error while fetching the data');
+          if (kDebugMode) {
+          print('Error fetching now playing movies:$e');
+        }
       }
       retraycount++;
     }
@@ -74,14 +78,18 @@ class movieServies {
           final List<dynamic> data = jsonDecode(response.body)['results'];
           return data
               .map((json) => Movie.fromJson(json))
-              .toList()
-              .cast<Movie>();
+              .toList();
+              
         }
       } catch (e) {
-        Text('Error while fetching the data');
+          if (kDebugMode) {
+          print('Error fetching now playing movies:$e');
+        }
       }
       retraycount++;
     }
     return [];
   }
+
+
 }

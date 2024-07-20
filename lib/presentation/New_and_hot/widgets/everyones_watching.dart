@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflix/application/model/movie_model.dart';
 import 'package:netflix/core/colors/constsans.dart';
-import 'package:netflix/presentation/home/custom_ButtonWidget.dart';
+import 'package:netflix/presentation/home/custom_button_widget.dart';
 import 'package:netflix/presentation/widgets/video_widget.dart';
 
 class EveryonesWachingWidget extends StatelessWidget {
@@ -20,12 +20,12 @@ final List movies;
         kheight,
          Text(
           everyone.title,
-          style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
         ),
         kheight,
          Text(
           everyone.overview,
-          style: TextStyle(color: Colors.grey),
+          style: const TextStyle(color: Colors.grey),
         ),
         kheight50,
         VideoWidget(image:movies[index].imagepath,),

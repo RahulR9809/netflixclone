@@ -1,7 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix/core/colors/colors.dart';
 import 'package:netflix/core/colors/constsans.dart';
-import 'package:netflix/presentation/home/custom_ButtonWidget.dart';
+import 'package:netflix/presentation/home/custom_button_widget.dart';
 
 class BackgroundCard extends StatelessWidget {
   const BackgroundCard({super.key});
@@ -10,12 +11,16 @@ class BackgroundCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-            width: double.infinity,
-            height: 600,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(kmainImage), fit: BoxFit.cover))),
+        SizedBox(
+          width: double.infinity,
+          height: 600,
+          child: CachedNetworkImage(
+            imageUrl:kmainImage,
+            fit: BoxFit.cover,
+            placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+            errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)),
+          ),
+        ),
         Positioned(
           bottom: 0,
           left: 0,
@@ -25,12 +30,12 @@ class BackgroundCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                CustomButtomWidget(
+                const CustomButtomWidget(
                   text: 'My List',
                   icon: Icons.add,
                 ),
                 _playButton(),
-                CustomButtomWidget(
+                const CustomButtomWidget(
                   text: 'info',
                   icon: Icons.info,
                 ),
@@ -44,21 +49,22 @@ class BackgroundCard extends StatelessWidget {
 
   TextButton _playButton() {
     return TextButton.icon(
-        onPressed: () {},
-        style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.all(kwhite),
+      onPressed: () {},
+      style: ButtonStyle(
+        backgroundColor: WidgetStateProperty.all(kwhite),
+      ),
+      icon: const Icon(
+        Icons.play_arrow,
+        color: kblackcolor,
+        size: 25,
+      ),
+      label: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: Text(
+          'Play',
+          style: TextStyle(fontSize: 20, color: kblackcolor),
         ),
-        icon: const Icon(
-          Icons.play_arrow,
-          color: kblackcolor,
-          size: 25,
-        ),
-        label: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          child: Text(
-            'Play',
-            style: TextStyle(fontSize: 20, color: kblackcolor),
-          ),
-        ));
+      ),
+    );
   }
 }

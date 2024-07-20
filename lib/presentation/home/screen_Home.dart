@@ -1,11 +1,11 @@
-import 'package:flutter/cupertino.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:netflix/application/controller/controller_movie.dart';
 import 'package:netflix/core/colors/constsans.dart';
-import 'package:netflix/presentation/home/background_Card.dart';
-import 'package:netflix/presentation/home/number_Title_card.dart';
+import 'package:netflix/presentation/home/background_card.dart';
+import 'package:netflix/presentation/home/numbertitle_card.dart';
 import 'package:netflix/presentation/widgets/main_title_card.dart';
 
 ValueNotifier<bool> scrollnotifier = ValueNotifier(true);
@@ -24,10 +24,10 @@ class _ScreenHomeState extends State<ScreenHome> {
   List upcoming=[];
   List clone=[];
   Future getAllmovies()async{
-       popular=await movieServies.getpopularMovies();
-    nowplaying=await movieServies.getNowplayingMovies();
-    upcoming=await movieServies.getUpcomingMovies(); 
-    clone=await movieServies.getNowplayingMovies();
+       popular=await MovieServies.getpopularMovies();
+    nowplaying=await MovieServies.getNowplayingMovies();
+    upcoming=await MovieServies.getUpcomingMovies(); 
+    clone=await MovieServies.getNowplayingMovies();
     setState(() {});
   }
   @override
@@ -44,8 +44,9 @@ class _ScreenHomeState extends State<ScreenHome> {
             valueListenable: scrollnotifier,
             builder: (BuildContext context, index, _) {
               return NotificationListener<UserScrollNotification>(
-                onNotification: (Notification) {
-                  final ScrollDirection direction = Notification.direction;
+              
+                onNotification: (UserScrollNotification notification) {
+                  final ScrollDirection direction = notification.direction;
                   if (direction == ScrollDirection.reverse) {
                     scrollnotifier.value = false;
                   } else if (direction == ScrollDirection.forward) {
@@ -57,7 +58,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                   children: [
                     ListView(
                       children: [
-                        BackgroundCard(),
+                        const BackgroundCard(),
                         MainTitleCard(
                           title: 'Released in the past year', 
                           movies: upcoming,
@@ -84,10 +85,9 @@ class _ScreenHomeState extends State<ScreenHome> {
                     ),
                     scrollnotifier.value == true
                         ? AnimatedContainer(
-                            duration: Duration(milliseconds: 1000),
+                            duration: const Duration(milliseconds: 1000),
                             width: double.infinity,
                             height: 95,
-                            // color: Colors.black.withOpacity(0.3),
                             child: Column(
                               children: [
                                 Row(
@@ -103,8 +103,8 @@ class _ScreenHomeState extends State<ScreenHome> {
                                         width: 55,
                                       ),
                                     ),
-                                    Spacer(),
-                                    Icon(
+                                    const Spacer(),
+                                    const Icon(
                                       Icons.cast,
                                       color: Colors.white,
                                       size: 30,
@@ -122,7 +122,7 @@ class _ScreenHomeState extends State<ScreenHome> {
                                   ],
                                 ),
                                 kheight,
-                                Row(
+                                const Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [

@@ -9,7 +9,7 @@ class NumberTitleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      const mainTitle(title: 'Top 10 Tv Shows in India Today'),
+      const MainTitle(title: 'Top 10 Tv Shows in India Today'),
       LimitedBox(
         maxHeight: 200,
         child: ListView(

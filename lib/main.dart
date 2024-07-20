@@ -4,17 +4,16 @@ import 'package:netflix/presentation/download/main_page/widgets/screen_main_page
 
 
 void main(){
-  runApp(myHomepage());
+  runApp(const MyHomepage());
 }
-class myHomepage extends StatelessWidget {
-  const myHomepage({super.key});
+class MyHomepage extends StatelessWidget {
+  const MyHomepage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'hei',
      theme: ThemeData(
-      appBarTheme:AppBarTheme(backgroundColor: Colors.transparent) ,
+      appBarTheme:const AppBarTheme(backgroundColor: Colors.transparent) ,
       scaffoldBackgroundColor:backgroundColor,
       primaryColor: Colors.blue,
       textTheme: const TextTheme(

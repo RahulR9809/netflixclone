@@ -13,7 +13,7 @@ final String image;
       children: [
         Row(
           children: [
-            SizedBox(
+            const SizedBox(
               width: 40,
               height: 200,
             ),
@@ -43,7 +43,7 @@ final String image;
             strokeWidth:3.0 ,
             child: Text(
               '${index+1}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 110,
                 color: kblackcolor,
                 fontWeight: FontWeight.bold,

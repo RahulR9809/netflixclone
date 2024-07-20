@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:netflix/application/model/movie_model.dart';
 import 'package:netflix/core/colors/colors.dart';
 import 'package:netflix/core/colors/constsans.dart';
-import 'package:netflix/presentation/home/custom_ButtonWidget.dart';
+import 'package:netflix/presentation/home/custom_button_widget.dart';
 import 'package:netflix/presentation/widgets/video_widget.dart';
 
 class ComingSoonwidget extends StatelessWidget {
@@ -59,15 +59,15 @@ class ComingSoonwidget extends StatelessWidget {
                           ),
                           child: Text(
                             coming.title,
-                            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],
                     ),
-                    Spacer(),
-                    Row(
+                    const Spacer(),
+                    const Row(
                       
                       children: [
                         
@@ -89,18 +89,18 @@ class ComingSoonwidget extends StatelessWidget {
                     ),
                   ],
                 ),
-                Text("Coming on Friday"),
+                const Text("Coming on Friday"),
                 kheight,
                 Text(
                   coming.title,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 
                 
                 ),
                 Flexible(
                   child: Text(
                     coming.overview,
-                    style: TextStyle(color: Colors.grey),
+                    style: const TextStyle(color: Colors.grey),
                     overflow: TextOverflow.ellipsis,
                       maxLines: 4,
                   ),

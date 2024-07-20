@@ -6,19 +6,19 @@ import 'package:netflix/core/colors/colors.dart';
 import 'package:netflix/core/colors/constsans.dart';
 import 'package:netflix/presentation/search/widget/title.dart';
 
-final imageurl =
+const imageurl =
     'https://image.tmdb.org/t/p/w600_and_h900_bestv2/sK6Nr6KNUA4WlAHyNBTioz9FK87.jpg';
 
 class Searchresultresult extends StatelessWidget {
   final List<Movie>result;
-  const Searchresultresult({Key? key, required this.result}) : super(key: key);
+  const Searchresultresult({super.key, required this.result});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        searchTextTitle(title: 'Movies & TV'),
+        const SearchTextTitle(title: 'Movies & TV'),
         kheight,
         Expanded(
             child: GridView.count(
@@ -37,7 +37,7 @@ class Searchresultresult extends StatelessWidget {
 
 class MainMovieCrad extends StatelessWidget {
   final String? url;
-  const MainMovieCrad({Key? key,  this.url}): super(key: key);
+  const MainMovieCrad({super.key,  this.url});
 
   @override
   Widget build(BuildContext context) {

@@ -14,7 +14,7 @@ class MainTitleCard extends StatelessWidget {
     return Column(
        crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        mainTitle(
+        MainTitle(
           title: title
           ),
          

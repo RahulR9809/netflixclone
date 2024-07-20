@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix/application/controller/controller_movie.dart';
 import 'package:netflix/core/colors/colors.dart';
@@ -21,8 +22,8 @@ bool isError=false;
 
 Future<void>upComingMovies()async{
   try{
-    List movies=await movieServies.getUpcomingMovies();
-    List popular=await movieServies.getpopularMovies();
+    List movies=await MovieServies.getUpcomingMovies();
+    List popular=await MovieServies.getpopularMovies();
 
 
     if(mounted){
@@ -33,7 +34,9 @@ setState(() {
 });
     }
   }catch(e){
-    print('Error fetching upcoming movies: $e');
+    if (kDebugMode) {
+      print('Error fetching upcoming movies: $e');
+    }
     if(mounted){
       setState(() {
         isError=true;
@@ -54,7 +57,7 @@ void initState(){
       length: 2,
       child:  Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(90),
+          preferredSize: const Size.fromHeight(90),
           child: AppBar(
             title: const Text(
               'New & Hot',
@@ -84,23 +87,23 @@ void initState(){
                 unselectedLabelColor: kwhite,
                 labelColor: kblackcolor,
                 labelStyle:
-                    TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 indicator:
                     BoxDecoration(borderRadius: kRadius30, color: kwhite),
-                tabs: [
-                  Tab(
+                tabs: const [
+                   Tab(
                     text: "🍿Coming Soon ",
                   ),
-                  Tab(
+                   Tab(
                     text: " 👀Everyone's Watching ",
                   )
                 ]),
           ),
         ),
         body: isLoading ?
-        Center(child: CircularProgressIndicator(),)
+        const Center(child: CircularProgressIndicator(),)
         :isError
-        ?Center(child: Text('Error fetching Movies'),)
+        ?const Center(child: Text('Error fetching Movies'),)
         :
          TabBarView(children: [
           _buildComingSoon(),

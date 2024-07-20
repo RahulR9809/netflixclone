@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:netflix/application/model/movie_model.dart';
 import 'package:netflix/core/colors/colors.dart';
 import 'package:netflix/core/colors/constsans.dart';
@@ -13,16 +12,16 @@ const image =
 class SearchIdle extends StatelessWidget {
   final List<Movie> result;
   const SearchIdle({
-    Key? key,
+    super.key,
     required this.result,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const searchTextTitle(
+        const SearchTextTitle(
           title: 'Top Searches',
         ),
         kheight,
@@ -37,7 +36,7 @@ class SearchIdle extends StatelessWidget {
                 );
               } else {
                
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }
             },
             separatorBuilder: (ctx, index) => const SizedBox(
@@ -70,13 +69,13 @@ class TopSearchItemTile extends StatelessWidget {
                   image: NetworkImage(imageBase + imageurl),
                   fit: BoxFit.cover)),
         ),
-        SizedBox(
+        const SizedBox(
           width: 8,
         ),
         Expanded(
             child: Text(
           nameMovie,
-          style: TextStyle(
+          style: const TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 17),
         )),
         const CircleAvatar(
